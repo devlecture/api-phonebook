@@ -1,27 +1,33 @@
-name: deploy
+name: Deploy Phonebook App
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches:
-      - master
+      - master # 또는 프로젝트의 기본 브랜치명
+
 
 
 jobs:
-  SSH:
-    runs-on: ubuntu-latest
+  build-and-deploy:
+	runs-on: ubuntu-latest
+	steps:
+	- name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+	  with:
+      	java-version: '17'
+		distribution: 'temurin'
+      
+    - name: Build with Maven
+      run: mvn clean package
 
-    steps:
-      - uses: actions/checkout@v3
-      - name: ssh to ec2
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            docker pull iremys/phonebook:latest
+    - name: Build Docker image
+      run: docker build . -t iremys/phonebook:latest
 
-  # 깃허브 레파지토리가 프라이빗으로 만들어져 있을때. 
-  # git pull https://${{ secrets.GIT_USER }}:${{ secrets.GIT_PASSWORD }}@github.com/blockenters/streamlit_kmeans.git
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      
+	- name: Push Docker image to Docker Hub
+      run: docker push iremys/phonebook:latest
