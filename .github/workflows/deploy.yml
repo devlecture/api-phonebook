@@ -1,0 +1,43 @@
+name: Deploy Phonebook App
+
+on:
+  push:
+    branches:
+      - main # 또는 프로젝트의 기본 브랜치명
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      
+      - name: Build with Maven
+        run: mvn clean package
+      
+      - name: Build Docker image
+        run: docker build . -t iremys/phonebook:latest
+      
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      
+      - name: Push Docker image to Docker Hub
+        run: docker push iremys/phonebook:latest
+      
+      - name: Deploy to AWS EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker pull iremys/phonebook:latest
+            docker stop phonebook || true
+            docker rm phonebook || true
+            docker run -d --name phonebook -p 9000:9000 iremys/phonebook:latest
