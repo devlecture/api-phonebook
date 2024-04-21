@@ -22,13 +22,13 @@ jobs:
         run: mvn clean package
 
       - name: Build Docker image
-        run: docker build . -t iremys/phonebook:latest
+        run: docker build . -t clz2024red/phonebook:latest
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Push Docker image to Docker Hub
-        run: docker push iremys/phonebook:latest
+        run: docker push clz2024red/phonebook:latest
         
         
   SSH:
@@ -43,7 +43,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            sudo docker pull iremys/phonebook:latest
+            sudo docker pull clz2024red/phonebook:latest
             sudo docker stop phonebook || true
             sudo docker rm phonebook || true
-            sudo docker run -d --name phonebook -p 9000:9000 iremys/phonebook:latest
+            sudo docker run -d --name phonebook -p 9000:9000 clz2024red/phonebook:latest
