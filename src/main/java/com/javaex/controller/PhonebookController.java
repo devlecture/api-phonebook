@@ -20,7 +20,7 @@ public class PhonebookController {
 	public PersonVo2 modifyForm() {
 		System.out.println("PhonebookController.modifyForm()");
 
-		PersonVo2 personVo = new PersonVo2(1,"홍길동", "010-2222-2222", "02-2222-2222", "👦🏻");
+		PersonVo2 personVo = new PersonVo2(1,"홍길동", "010-2222-2222", "02-2222-2222", "남");
 		return personVo;
 	}
 
