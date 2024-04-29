@@ -13,7 +13,7 @@ import com.javaex.vo.PersonVo2;
 public class PhonebookController {
 
 	@Autowired
-	private PhonebookService phonebookService;
+	//private PhonebookService phonebookService;
 
 	// 1명데이터가져오기(수정폼)
 	@GetMapping(value = "")

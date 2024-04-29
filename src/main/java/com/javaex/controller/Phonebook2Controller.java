@@ -18,7 +18,7 @@ import com.javaex.vo.PersonVo;
 
 @RestController
 @RequestMapping("/api/persons")
-public class PhonebookController2 {
+public class Phonebook2Controller {
 
 	@Autowired
 	private PhonebookService phonebookService;
