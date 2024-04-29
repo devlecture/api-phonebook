@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.javaex.service.PhonebookService;
 import com.javaex.vo.JsonResult;
 import com.javaex.vo.PersonVo;
-import com.javaex.vo.PersonVo2;
+import com.javaex.vo.PVo;
 
 
 @RestController
@@ -22,19 +22,19 @@ public class TestController {
 
 	// 1명데이터가져오기(수정폼)
 	@GetMapping(value = "")
-	public PersonVo2 modifyForm() {
+	public PVo modifyForm() {
 		System.out.println("PhonebookController.modifyForm()");
 
-		PersonVo2 personVo = new PersonVo2(1,"홍길동", "010-2222-2222", "02-2222-2222", "남");
+		PVo personVo = new PVo(1,"홍길동", "010-2222-2222", "02-2222-2222", "남");
 		return personVo;
 	}
 
 	// 1명데이터가져오기(수정폼)
 	@GetMapping(value = "/a")
-	public PersonVo2 modifyForm2() {
+	public PVo modifyForm2() {
 		System.out.println("PhonebookController.modifyForm()");
 
-		PersonVo2 personVo = new PersonVo2(1,"홍길동", "010-2222-2222", "02-2222-2222", "aaa");
+		PVo personVo = new PVo(1,"홍길동", "010-2222-2222", "02-2222-2222", "aaa");
 		return personVo;
 	}
 	
