@@ -13,10 +13,10 @@ public class BoardController {
 	
 	// 1명데이터가져오기(수정폼)
 	@GetMapping(value = "/b")
-	public String getList() {
+	public PVo getList() {
 		System.out.println("PhonebookController.modifyForm()");
 
-		PVo personVo = new PVo(1, "홍길동", "010-2222-2222", "02-2222-2222", "aaa");
-		return "board";
+		PVo personVo = new PVo(1,"홍길동", "010-2222-2222", "02-2222-2222", "aaa");
+		return personVo;
 	}
 }
