@@ -17,7 +17,7 @@ import com.javaex.vo.JsonResult;
 import com.javaex.vo.PersonVo;
 
 @RestController
-@RequestMapping("/api/persons")
+@RequestMapping("/api/aaa")
 public class PhonebookController {
 
 	@Autowired
