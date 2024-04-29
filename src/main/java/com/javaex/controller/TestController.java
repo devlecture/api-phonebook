@@ -17,8 +17,8 @@ import com.javaex.vo.PVo;
 @RequestMapping("/api/myclass")
 public class TestController {
 
-	@Autowired
-	private PhonebookService phonebookService;
+	//@Autowired
+	//private PhonebookService phonebookService;
 
 	// 1명데이터가져오기(수정폼)
 	@GetMapping(value = "")
@@ -39,12 +39,12 @@ public class TestController {
 	}
 	
 	// 전체리스트
-	@GetMapping(value = "/p")
-	public JsonResult list() {
-		System.out.println("PhonebookController.list()");
-
-		List<PersonVo> personList = phonebookService.exeList();
-		return JsonResult.success(personList);
-	}
+	/*
+	 * @GetMapping(value = "/p") public JsonResult list() {
+	 * System.out.println("PhonebookController.list()");
+	 * 
+	 * List<PersonVo> personList = phonebookService.exeList(); return
+	 * JsonResult.success(personList); }
+	 */
 
 }
