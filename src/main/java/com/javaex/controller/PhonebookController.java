@@ -19,7 +19,7 @@ import com.javaex.vo.PersonVo;
 
 
 @RestController
-@RequestMapping("/api/aaa")
+@RequestMapping("/api/persons")
 public class PhonebookController {
 
 	@Autowired
